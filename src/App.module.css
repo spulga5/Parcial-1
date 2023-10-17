@@ -1,0 +1,15 @@
+.container {
+  background: white;
+  width: 150%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerChild{
+  width: 135%;
+  float: left;
+  margin: 2%;
+  padding: 20px;
+  border: 4px solid black;
+}

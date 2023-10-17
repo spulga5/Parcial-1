@@ -1,0 +1,25 @@
+.encabezado{
+    background-color:gray ;
+    height: 100px;
+    width: 155%;
+}
+.encabezado h1 {
+    color: blue;
+    text-align: left;
+    margin: 40px;
+    font-size: 55px;
+}
+.encabezado .ingreso{
+    position: absolute;
+    top: 40px;
+    left: 70%;
+}
+.encabezado .final{
+    position: absolute;
+    top: 40px;
+    left: 85%;
+}
+.encabezado h3{
+    text-align: left;
+    margin: 4px;
+}
