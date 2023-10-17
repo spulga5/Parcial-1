@@ -13,7 +13,7 @@ const Registro = ({inputName, setinputName, inputCantidad, setinputCantidad, Lis
         id: uuid4(),
         title: inputName,
         amount: inputCantidad,
-        completed: false,
+        mode: tipo,
     };
     setListas([...Listas, newLista]);
     setinputName(" ");

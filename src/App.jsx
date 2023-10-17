@@ -12,6 +12,7 @@ const App = () => {
   const [Listas, setListas] = useState([]);
   const [saldo, setSaldo] = useState(0);
   const [edit, setEdit] = useState(null);
+  const [tipo, setTipo] = useState(" ");
 
   return (
     <>
@@ -32,6 +33,8 @@ const App = () => {
         setListas={setListas}
         edit = {edit}
         setEdit = {setEdit}
+        tipo = {tipo}
+        setTipo = {setTipo}
         />
       </div>
       <div className={style.containerChild}>
