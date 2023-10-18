@@ -14,21 +14,20 @@ const Registro = (props) => {
       amount: inputAmount,
       completed: false,
     };
-    console.log("Holi");
     setTransactionList((prevState) => [...prevState, newItem]);
-    // setinputName(" ");
-    // setinputCantidad();
+      setInputName(" ");
+      setInputCantidad();
   };
 
-  // const editar = (Listas) => {
-  //   const newLista = Listas.map((item) =>
-  //     item.id === Listas.id
-  //       ? { ...Listas, title: inputName, amount: inputCantidad }
-  //       : item
-  //   );
-  //   setLista(newLista);
-  //   setEdit(null);
-  // };
+   const editar = (Listas) => {
+     const newLista = Listas.map((item) =>
+       item.id === Listas.id
+         ? { ...Listas, title: inputName, amount: inputCantidad }
+         : item
+     );
+     setTransactionList(newLista);
+     setEdit(null);
+   };
 
   // useEffect(() => {
   //   if (edit) {

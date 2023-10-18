@@ -11,33 +11,9 @@ const App = () => {
   const [balance, setBalance] = useState(0);
   const [edit, setEdit] = useState(null);
   const [tipo, setTipo] = useState(" ");
-  const [saldo, setSaldo] = useState(0);
 
   return (
     <>
-    <div>
-      <Header 
-      saldo = {saldo}
-      setSaldo = {setSaldo}
-      />
-    </div>
-    <div className={style.container}>
-      <div className={style.containerChild}>
-
-        <Registro 
-        inputName = {inputName}
-        setinputName = {setinputName}
-        inputCantidad = {inputCantidad}
-        setinputCantidad = {setinputCantidad}
-        Listas={Listas}
-        setListas={setListas}
-        edit = {edit}
-        setEdit = {setEdit}
-        tipo = {tipo}
-        setTipo = {setTipo}
-        />
-      </div>
-    </div>
       <div>
         <Header alance={balance} setBalance={setBalance} />
       </div>
