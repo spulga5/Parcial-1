@@ -1,74 +1,87 @@
-import React, {useState,useEffect} from 'react'
-import Style from "./Registro.module.css"
-import uuid4 from "uuid4"
-const Registro = ({inputName, setinputName, inputCantidad, setinputCantidad, Listas, setListas, edit, setEdit}) => {
-  
-  const agregar = (e) => {
+import PropTypes from "prop-types";
+import Style from "./Registro.module.css";
+import uuid4 from "uuid4";
+
+const Registro = (props) => {
+  const { inputName, inputAmount } = props;
+  const { setInputName, setInputAmount, setTransactionList } = props;
+
+  const addItemHandler = (e) => {
     e.preventDefault();
-    if (edit){
-      editar(edit);
-    }
-    else {
-      const newLista = {
-        id: uuid4(),
-        title: inputName,
-        amount: inputCantidad,
-        mode: tipo,
+    const newItem = {
+      id: uuid4(),
+      title: inputName,
+      amount: inputAmount,
+      completed: false,
     };
-    setListas([...Listas, newLista]);
-    setinputName(" ");
-    setinputCantidad( );}
+    console.log("Holi");
+    setTransactionList((prevState) => [...prevState, newItem]);
+    // setinputName(" ");
+    // setinputCantidad();
   };
-  const editar = (Listas) => {
-    const newLista = Listas.map((item) => 
-    item.id === Listas.id ? {...Listas, title: inputName, amount: inputCantidad} : item
-    );
-    setListas(newLista);
-    setEdit(null);
-  } 
-  
-  useEffect(() => {
-    if (edit) {
-      setinputName(edit.title);
-      setinputCantidad(edit.amount);
-    } else {
-      setinputName(" ");
-      setinputCantidad(0);
-    }
-  }, [edit])
-  
+
+  // const editar = (Listas) => {
+  //   const newLista = Listas.map((item) =>
+  //     item.id === Listas.id
+  //       ? { ...Listas, title: inputName, amount: inputCantidad }
+  //       : item
+  //   );
+  //   setLista(newLista);
+  //   setEdit(null);
+  // };
+
+  // useEffect(() => {
+  //   if (edit) {
+  //     setinputName(edit.title);
+  //     setinputCantidad(edit.amount);
+  //   } else {
+  //     setinputName(" ");
+  //     setinputCantidad(0);
+  //   }
+  // }, [edit, setinputCantidad, setinputName]);
 
   return (
-    <form onSubmit={agregar}>
+    <form onSubmit={addItemHandler}>
       <div className={Style.registro}>
         <h1 className={Style.titulo}>Registro</h1>
         <h3>Tipo de movimiento</h3>
-        <select name="transactioType" >
+        <select name="transactioType">
           <option value="ingreso">Ingreso</option>
           <option value="egreso">Gasto</option>
         </select>
         <h3>Nombre</h3>
-        <input 
-          name='transactionName' 
-          type='text' 
+        <input
+          name="transactionName"
+          type="text"
           className={Style.nombre}
           value={inputName}
-          onChange={(e) => setinputName(e.target.value)}
-          ></input>
+          onChange={(e) => setInputName(e.target.value)}
+        ></input>
         <h3>Cantidad</h3>
-        <input 
-          name='transactionValue'
-          type='number'
+        <input
+          name="transactionValue"
+          type="number"
           className={Style.cantidad}
-          value={inputCantidad}
-          onChange={(e) => setinputCantidad(e.target.value)}
+          value={inputAmount}
+          onChange={(e) => setInputAmount(e.target.value)}
         ></input>
         <br /> <br />
         <button>Cancelar</button>
-        <button type='submit' className={Style.button}> {edit ? "Editar": "Agregar Movimiento"}</button>
+        <button type="submit" className={Style.button}>
+          Agregar Movimiento
+        </button>
       </div>
     </form>
   );
+};
+
+Registro.propTypes = {
+  inputName: PropTypes.string.isRequired,
+  setInputName: PropTypes.func.isRequired,
+  inputAmount: PropTypes.number.isRequired,
+  setInputAmount: PropTypes.func.isRequired,
+  transactionList: PropTypes.array.isRequired,
+  setTransactionList: PropTypes.func.isRequired,
 };
 
 export default Registro;
