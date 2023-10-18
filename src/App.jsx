@@ -9,7 +9,7 @@ const App = () => {
   const [inputAmount, setInputAmount] = useState(0);
   const [transactionList, setTransactionList] = useState([]);
   const [balance, setBalance] = useState(0);
-  const [edit, setEdit] = useState(null);
+  const [editing, setEditing] = useState({ isEditing: false, id: null });
 
   return (
     <>
@@ -25,15 +25,17 @@ const App = () => {
             setInputAmount={setInputAmount}
             transactionList={transactionList}
             setTransactionList={setTransactionList}
-            edit={edit}
-            setEdit={setEdit}
+            editing={editing}
+            setEditing={setEditing}
           />
         </div>
         <div className={style.containerChild}>
           <Listado
             transactionList={transactionList}
             setTransactionList={setTransactionList}
-            setEdit={setEdit}
+            setInputName={setInputName}
+            setInputAmount={setInputAmount}
+            setEditing={setEditing}
           />
         </div>
       </div>

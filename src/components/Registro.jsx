@@ -3,8 +3,16 @@ import Style from "./Registro.module.css";
 import uuid4 from "uuid4";
 
 const Registro = (props) => {
-  const { inputName, inputAmount } = props;
-  const { setInputName, setInputAmount, setTransactionList } = props;
+  const { inputName, inputAmount, editing, setEditing } = props;
+  const { setInputName, setInputAmount } = props;
+  const { transactionList, setTransactionList } = props;
+
+  const { id: editingId, isEditing } = editing;
+
+  const resetFormValues = () => {
+    setInputName("");
+    setInputAmount(0);
+  };
 
   const addItemHandler = (e) => {
     e.preventDefault();
@@ -14,21 +22,21 @@ const Registro = (props) => {
       amount: inputAmount,
       completed: false,
     };
-    console.log("Holi");
     setTransactionList((prevState) => [...prevState, newItem]);
-    // setinputName(" ");
-    // setinputCantidad();
+    resetFormValues();
   };
 
-  // const editar = (Listas) => {
-  //   const newLista = Listas.map((item) =>
-  //     item.id === Listas.id
-  //       ? { ...Listas, title: inputName, amount: inputCantidad }
-  //       : item
-  //   );
-  //   setLista(newLista);
-  //   setEdit(null);
-  // };
+  const editHandler = (e) => {
+    e.preventDefault();
+    const newList = transactionList.map((item) =>
+      editingId === item.id
+        ? { ...item, title: inputName, amount: inputAmount }
+        : item
+    );
+    setTransactionList(newList);
+    setEditing({ id: null, isEditing: false });
+    resetFormValues();
+  };
 
   // useEffect(() => {
   //   if (edit) {
@@ -41,7 +49,7 @@ const Registro = (props) => {
   // }, [edit, setinputCantidad, setinputName]);
 
   return (
-    <form onSubmit={addItemHandler}>
+    <form onSubmit={isEditing ? editHandler : addItemHandler}>
       <div className={Style.registro}>
         <h1 className={Style.titulo}>Registro</h1>
         <h3>Tipo de movimiento</h3>
@@ -68,7 +76,7 @@ const Registro = (props) => {
         <br /> <br />
         <button>Cancelar</button>
         <button type="submit" className={Style.button}>
-          Agregar Movimiento
+          {isEditing ? "Editar" : "Agregar"} Movimiento
         </button>
       </div>
     </form>
@@ -82,6 +90,8 @@ Registro.propTypes = {
   setInputAmount: PropTypes.func.isRequired,
   transactionList: PropTypes.array.isRequired,
   setTransactionList: PropTypes.func.isRequired,
+  editing: PropTypes.obj,
+  setEditing: PropTypes.func,
 };
 
 export default Registro;
